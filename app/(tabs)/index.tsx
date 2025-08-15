@@ -50,8 +50,10 @@ export default function OddServicesScreen() {
         expiresAt: payload.expiresAt,
       });
       setCreateModalVisible(false);
-    } catch (e) {
+    } catch (e: any) {
       Alert.alert("Error", "Failed to create service. Please try again.");
+      console.error('createService failed', e);
+      Alert.alert("Error", String(e?.message ?? e));
     }
   };
 

@@ -1,5 +1,5 @@
-import { ref, onValue, push, remove, update } from "firebase/database";
-import { db } from "@/firebaseConfig";
+import { ref, onValue, push, remove, update, set } from "firebase/database";
+import { db } from "../../firebaseConfig";
 
 // Domain types
 export type Service = {
@@ -22,7 +22,7 @@ export type ServiceCreateInput = {
   tags?: string[];
   description?: string;
   location?: string;
-  phone?: string;
+  phone?: string; // raw input (may be empty)
   price?: number | null;
   barter?: string | null;
   expiresAt?: number; // absolute timestamp in ms
@@ -37,6 +37,14 @@ export function normalizePhone(input: string): string {
   return input.replace(/\D/g, "");
 }
 
+function omitUndefined<T extends Record<string, any>>(obj: T): T {
+  const out: Record<string, any> = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (v !== undefined) out[k] = v;
+  }
+  return out as T;
+}
+
 export function filterActiveServices(list: Service[], now: number = Date.now()): Service[] {
   return list.filter((s) => !s.expiresAt || s.expiresAt > now);
 }
@@ -49,7 +57,6 @@ export function subscribeServices(callback: (services: Service[]) => void): () =
     const items: Service[] = Object.keys(data).map((key) => ({ id: key, ...data[key] }));
     callback(items);
   });
-  // onValue returns the unsubscribe function itself
   return () => unsubscribe();
 }
 
@@ -57,28 +64,33 @@ export function subscribeServices(callback: (services: Service[]) => void): () =
 export async function createService(input: ServiceCreateInput): Promise<string> {
   const servicesRef = ref(db, "services");
   const now = Date.now();
-  const payload = {
+  const phoneDigits = input.phone ? normalizePhone(input.phone) : "";
+
+  const payload = omitUndefined({
     title: input.title.trim(),
     tags: input.tags ?? [],
     description: input.description ?? "",
     location: input.location ?? "",
-    phone: input.phone ? normalizePhone(input.phone) : undefined,
+    phone: phoneDigits.length > 0 ? phoneDigits : undefined,
     price: typeof input.price === "number" ? input.price : null,
     barter: input.barter ?? null,
     createdAt: now,
     expiresAt: input.expiresAt,
     userId: input.userId ?? undefined,
     status: input.status ?? "active",
-  };
-  const newRef = await push(servicesRef, payload);
-  if (!newRef.key) throw new Error("Failed to create service");
+  });
+
+  const newRef = push(servicesRef);
+  await set(newRef, payload);
+  if (!newRef.key) throw new Error("Failed to create service key");
   return newRef.key;
 }
 
 // Update an existing service
 export async function updateService(id: string, patch: ServiceUpdateInput): Promise<void> {
   if (!id) throw new Error("Missing service id");
-  await update(ref(db, `services/${id}`), patch);
+  const cleaned = omitUndefined(patch as Record<string, any>);
+  await update(ref(db, `services/${id}`), cleaned);
 }
 
 // Delete a service
