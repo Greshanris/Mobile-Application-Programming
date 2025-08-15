@@ -1,0 +1,122 @@
+{
+  "name": "OddServices Style Guide",
+  "version": "1.0.0",
+  "description": "Style guide for the OddServices React Native application",
+  "colors": {
+    "primary": "#022B3A",
+    "secondary": "#1F7A8C",
+    "background": "#FFFFFF",
+    "cardBackground": "#E6ECEA",
+    "textPrimary": "#022B3A",
+    "textSecondary": "#6B7280",
+    "accent": "#007AFF",
+    "priceAccent": "#065F46",
+    "barterAccent": "#9b59b6",
+    "border": "#E5E7EB",
+    "buttonDisabled": "#6B7280",
+    "buttonPrimary": "#022B3A",
+    "overlay": "rgba(31, 122, 140, 0.8)",
+    "chipBackground": "#E6ECEA",
+    "pricePillBackground": "#E8F7F2",
+    "pricePillBorder": "#A7F3D0",
+    "iconButtonBackground": "#EFF6FF",
+    "iconButtonBorder": "#DBEAFE"
+  },
+  "typography": {
+    "header": {
+      "fontSize": 20,
+      "fontWeight": "bold",
+      "color": "#FFFFFF"
+    },
+    "title": {
+      "fontSize": 17,
+      "fontWeight": "700",
+      "color": "#022B3A"
+    },
+    "subtitle": {
+      "fontSize": 14,
+      "color": "#6B7280"
+    },
+    "price": {
+      "fontSize": 14,
+      "fontWeight": "bold",
+      "color": "#1F7A8C"
+    },
+    "chip": {
+      "fontSize": 12,
+      "fontWeight": "600",
+      "color": "#022B3A"
+    },
+    "date": {
+      "fontSize": 12,
+      "color": "#6B7280"
+    },
+    "button": {
+      "fontSize": 16,
+      "fontWeight": "bold",
+      "color": "#FFFFFF"
+    }
+  },
+  "spacing": {
+    "padding": 20,
+    "cardPadding": 16,
+    "modalPadding": 24,
+    "marginBottom": 12,
+    "marginTop": 8,
+    "headerMargin": 23,
+    "chipMargin": 6,
+    "buttonPadding": 10,
+    "iconButtonSize": 36
+  },
+  "borders": {
+    "radiusSmall": 8,
+    "radiusLarge": 12,
+    "radiusPill": 999,
+    "borderWidth": 1
+  },
+  "shadows": {
+    "card": {
+      "shadowColor": "#000",
+      "shadowOpacity": 0.08,
+      "shadowRadius": 8,
+      "shadowOffset": { "width": 0, "height": 2 },
+      "elevation": 3
+    }
+  },
+  "components": {
+    "card": {
+      "backgroundColor": "#FFFFFF",
+      "borderColor": "#E5E7EB",
+      "borderRadius": 12,
+      "padding": 16,
+      "marginBottom": 12
+    },
+    "pricePill": {
+      "backgroundColor": "#E8F7F2",
+      "borderColor": "#A7F3D0",
+      "borderRadius": 999,
+      "paddingVertical": 4,
+      "paddingHorizontal": 10
+    },
+    "chip": {
+      "backgroundColor": "#E6ECEA",
+      "borderColor": "#1F7A8C",
+      "borderRadius": 999,
+      "paddingVertical": 4,
+      "paddingHorizontal": 10
+    },
+    "iconButton": {
+      "width": 36,
+      "height": 36,
+      "borderRadius": 18,
+      "backgroundColor": "#EFF6FF",
+      "borderColor": "#DBEAFE",
+      "borderWidth": 1
+    },
+    "button": {
+      "borderRadius": 8,
+      "paddingVertical": 10,
+      "paddingHorizontal": 10
+    }
+  }
+}
