@@ -152,7 +152,7 @@ export default function OddServicesScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#FFFFFF", padding: 20 },
-  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16, marginTop: 23, backgroundColor: "#022B3A", padding: 10, borderRadius: 8 },
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 16, backgroundColor: "#022B3A", padding: 10, borderRadius: 8 },
   headerTitle: { color: "#FFFFFF", fontSize: 20, fontWeight: "bold" },
   headerActions: { flexDirection: "row", alignItems: "center" },
   loadingText: { color: "#6B7280", textAlign: "center", marginTop: 20 },
